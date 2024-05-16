@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.33529.622
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EyeShot.TempEntities", "EyeShot.TempEntities\EyeShot.TempEntities.csproj", "{56FFEFDF-10AE-4134-92CF-80016818450F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{56FFEFDF-10AE-4134-92CF-80016818450F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56FFEFDF-10AE-4134-92CF-80016818450F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56FFEFDF-10AE-4134-92CF-80016818450F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56FFEFDF-10AE-4134-92CF-80016818450F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B08A3563-1AAA-4E1C-9F0B-4083D46DE5C7}
+	EndGlobalSection
+EndGlobal
