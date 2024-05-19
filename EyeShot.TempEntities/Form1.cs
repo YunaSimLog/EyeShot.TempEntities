@@ -80,6 +80,60 @@ namespace EyeShot.TempEntities
             devDept.Eyeshot.Entities.Region circle = devDept.Eyeshot.Entities.Region.CreateCircle(3.6);
             slot = devDept.Eyeshot.Entities.Region.Difference(slot, circle)[0];
 
+            circle.Translate(-20, 0, 0);
+            slot = devDept.Eyeshot.Entities.Region.Difference(slot, circle)[0];
+
+            circle.Translate(40, 0, 0);
+            slot = devDept.Eyeshot.Entities.Region.Difference(slot, circle)[0];
+
+            slotMesh = slot.ExtrudeAsBrep(Vector3D.AxisZ * 5);
+            slotMesh.Rotate(Math.PI / 2, Vector3D.AxisZ);
+            slotMesh.Color = colors[0];
+            slotMesh.MaterialName = "wood";
+            slotMesh.ColorMethod = colorMethodType.byEntity;
+
+            // triangle
+            LinearPath trianglePath = new LinearPath(Point3D.Origin, new Point3D(36, 0, 0), new Point3D(18, 0, 25), Point3D.Origin);
+            devDept.Eyeshot.Entities.Region triangleRegion2 = new devDept.Eyeshot.Entities.Region(trianglePath);
+            triangleMesh = triangleRegion2.ExtrudeAsBrep(Vector3D.AxisMinusY * 5);
+            triangleMesh.Color = colors[1];
+            triangleMesh.ColorMethod = colorMethodType.byEntity;
+            triangleMesh.Rotate(Utility.DegToRad(90), Vector3D.AxisMinusZ);
+            triangleMesh.Translate(52, -3, 0);
+
+            // wheels
+            wheelAxisMesh = Brep.CreateCylinder(3, 65);
+            wheelAxisMesh.MaterialName = "wood";
+            wheelAxisMesh.Rotate(Math.PI / 2, Vector3D.AxisY);
+            wheelAxisMesh.Color = colors[2];
+            wheelAxisMesh.ColorMethod = colorMethodType.byEntity;
+
+            devDept.Eyeshot.Entities.Region outer = devDept.Eyeshot.Entities.Region.CreateCircle(Plane.YZ, 12);
+            devDept.Eyeshot.Entities.Region inner = devDept.Eyeshot.Entities.Region.CreateCircle(Plane.YZ, 3);
+            devDept.Eyeshot.Entities.Region wheel = devDept.Eyeshot.Entities.Region.Difference(outer, inner)[0];
+
+            wheelRMesh = wheel.ExtrudeAsBrep(10);
+            wheelRMesh.Translate(55, 0, 0);
+            wheelRMesh.Color = colors[2];
+            wheelRMesh.ColorMethod = colorMethodType.byEntity;
+
+            wheelLMesh = wheel.ExtrudeAsBrep(-10);
+            wheelLMesh.Translate(10, 0, 0);
+            wheelLMesh.Color = colors[2];
+            wheelLMesh.ColorMethod = colorMethodType.byEntity;
+
+            // cylinder
+            cylMesh = Brep.CreateCylinder(3.5, 40);
+            cylMesh.Color = colors[3];
+            cylMesh.ColorMethod = colorMethodType.byEntity;
+
+            // box
+            baseMesh = Brep.CreateBox(40, 40, 5);
+            baseMesh.Color = colors[4];
+            baseMesh.ColorMethod = colorMethodType.byEntity;
+
+
+
         }
     }
 }
