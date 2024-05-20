@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -19,6 +20,7 @@ namespace EyeShot.TempEntities
     {
         private readonly string _dirName = "myPictures";
         private Plane _plane;
+        private Size _imgSize;
 
         public Form1()
         {
@@ -132,8 +134,84 @@ namespace EyeShot.TempEntities
             baseMesh.Color = colors[4];
             baseMesh.ColorMethod = colorMethodType.byEntity;
 
+            // 지오메트리를 포함하는 블록 만들기
+            Block baseBlock = new Block("Box");
+            baseBlock.Entities.Add(baseMesh);
 
+            Block redSlotBlock = new Block("Slot");
+            redSlotBlock.Entities.Add(slotMesh);
 
+            Block yellowTriangleBlock = new Block("Triangle");
+            yellowTriangleBlock.Entities.Add(triangleMesh);
+
+            Block greenBlock = new Block("Cylinder");
+            greenBlock.Entities.Add(cylMesh);
+
+            Block wheelBlock = new Block("Wheels");
+            wheelBlock.Entities.Add(wheelAxisMesh);
+            wheelBlock.Entities.Add(wheelRMesh);
+            wheelBlock.Entities.Add(wheelLMesh);
+
+            design1.Blocks.Add(baseBlock);
+            design1.Blocks.Add(redSlotBlock);
+            design1.Blocks.Add(yellowTriangleBlock);
+            design1.Blocks.Add(greenBlock);
+            design1.Blocks.Add(wheelBlock);
+
+            // 블록 마다 썸네일 이미지 작성
+            foreach (Block b in design1.Blocks)
+            {
+                if (string.Equals(b.Name, design1.Blocks.RootBlockName))
+                    continue;
+
+                design1.Entities.Clear();
+
+                BlockReference reference = new BlockReference(b.Name);
+                design1.Entities.Add(reference);
+
+                design1.ZoomFit();
+
+                Bitmap previewElement = design1.ActiveViewport.GetThumbnail(100, Color.Transparent);
+                _imgSize = previewElement.Size;
+                previewElement.Save(_dirName + "\\" + b.Name + ".bmp");
+            }
+
+            // 리스트 뷰에 블록 리스트 항목 채우기
+            FillListView();
+
+        }
+
+        private void FillListView()
+        {
+            imageList1.ImageSize = _imgSize;
+
+            listView1.View = System.Windows.Forms.View.LargeIcon;
+            listView1.Scrollable = true;
+
+            // 썸네일 이미지 리스트 구성
+            DirectoryInfo di = new DirectoryInfo(_dirName);
+            foreach (FileInfo fi in di.GetFiles())
+            {
+                try
+                {
+                    string name = Path.GetFileNameWithoutExtension(fi.Name);
+                    imageList1.Images.Add(name, Image.FromFile(fi.FullName));
+                }
+                catch (Exception ex)
+                {
+                    Debug.Print(ex.Message);
+                    Debug.Assert(false);
+                }
+            }
+
+            // 리스트 뷰에 아이템 구성
+            listView1.LargeImageList = imageList1;
+            for (int i = 0; i < imageList1.Images.Count; i++)
+            {
+                ListViewItem item = new ListViewItem();
+                item.ImageIndex = i;
+                listView1.Items.Add(imageList1.Images.Keys[i], "", i);
+            }
         }
     }
 }

@@ -117,7 +117,7 @@ namespace EyeShot.TempEntities
             this.groupBox4.Controls.Add(this.bboxCheckBox);
             this.groupBox4.Location = new System.Drawing.Point(523, 235);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(243, 164);
+            this.groupBox4.Size = new System.Drawing.Size(243, 203);
             this.groupBox4.TabIndex = 16;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Drag and Drop as TempEntity";
@@ -132,7 +132,7 @@ namespace EyeShot.TempEntities
             this.listView1.Location = new System.Drawing.Point(7, 15);
             this.listView1.Margin = new System.Windows.Forms.Padding(0);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(227, 125);
+            this.listView1.Size = new System.Drawing.Size(227, 164);
             this.listView1.TabIndex = 5;
             this.listView1.UseCompatibleStateImageBehavior = false;
             // 
@@ -140,7 +140,7 @@ namespace EyeShot.TempEntities
             // 
             this.bboxCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.bboxCheckBox.AutoSize = true;
-            this.bboxCheckBox.Location = new System.Drawing.Point(7, 145);
+            this.bboxCheckBox.Location = new System.Drawing.Point(7, 184);
             this.bboxCheckBox.Name = "bboxCheckBox";
             this.bboxCheckBox.Size = new System.Drawing.Size(112, 16);
             this.bboxCheckBox.TabIndex = 6;
