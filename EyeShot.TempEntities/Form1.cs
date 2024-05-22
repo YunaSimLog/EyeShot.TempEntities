@@ -30,9 +30,78 @@ namespace EyeShot.TempEntities
 
         protected override void OnLoad(EventArgs e)
         {
+            // 리스트 뷰에 삽입할 요소 생성
             CreateElements();
 
+            // 디자인 요소들 초기화
+            design1.Entities.Clear();
+
+            design1.Entities.Add(new BlockReference("Box"));
+            design1.Entities.Add(new BlockReference(-20, 50, 0, "Cylinder", 0));
+            design1.Entities.Add(new BlockReference(60, -15, 0, "Slot", 0));
+            design1.Entities.Add(new BlockReference(10, 50, 0, "Triangle", 0));
+            design1.Entities.Add(new BlockReference(-30, -30, 0, "Wheels", 0));
+
+            // 트리뷰에 화면에 보이는 요소들 추가하기
+            PopulateTree(treeView1, design1.Entities, design1.Blocks);
+
+            design1.ZoomFit();
+
             base.OnLoad(e);
+        }
+
+        private void PopulateTree(TreeView tv, IList<Entity> entList, BlockKeyedCollection blocks, TreeNode parentNode = null)
+        {
+            TreeNodeCollection nodes;
+
+            if (parentNode == null)
+            {
+                tv.Nodes.Clear();
+                nodes = tv.Nodes;
+            }
+            else
+            {
+                nodes = parentNode.Nodes;
+            }
+
+            tv.BeginUpdate();
+
+            for (int i = 0; i < entList.Count; i++)
+            {
+                Entity entity = entList[i];
+                if (entity is BlockReference)
+                {
+                    Block child;
+                    string blockName = (entity as BlockReference).BlockName;
+
+                    if (blocks.TryGetValue(blockName, out child))
+                    {
+                        TreeNode parentTN = new TreeNode(GetNodeName(blockName, i));
+                        parentTN.Tag = entity;
+                        parentTN.ImageIndex = 0;
+                        parentTN.SelectedImageIndex = 0;
+
+                        nodes.Add(parentTN);
+                        PopulateTree(tv, child.Entities, blocks, parentTN);
+                    }
+                }
+                else
+                {
+                    string type = entity.GetType().ToString().Split('.').LastOrDefault();
+                    var node = new TreeNode(GetNodeName(type, i));
+                    node.Tag = entity;
+                    node.ImageIndex = 1;
+                    node.SelectedImageIndex = 1;
+                    nodes.Add(node);
+                }
+            }
+
+            tv.EndUpdate();
+        }
+
+        private string GetNodeName(string name, int index)
+        {
+            return $"{name} {index}";
         }
 
         private void CreateElements()
@@ -97,10 +166,10 @@ namespace EyeShot.TempEntities
             // triangle
             LinearPath trianglePath = new LinearPath(Point3D.Origin, new Point3D(36, 0, 0), new Point3D(18, 0, 25), Point3D.Origin);
             devDept.Eyeshot.Entities.Region triangleRegion2 = new devDept.Eyeshot.Entities.Region(trianglePath);
-            triangleMesh = triangleRegion2.ExtrudeAsBrep(Vector3D.AxisMinusY * 5);
+            triangleMesh = triangleRegion2.ExtrudeAsBrep(Vector3D.AxisY * 5);
             triangleMesh.Color = colors[1];
             triangleMesh.ColorMethod = colorMethodType.byEntity;
-            triangleMesh.Rotate(Utility.DegToRad(90), Vector3D.AxisMinusZ);
+            triangleMesh.Rotate(Utility.DegToRad(90), Vector3D.AxisZ);
             triangleMesh.Translate(52, -3, 0);
 
             // wheels
@@ -179,6 +248,12 @@ namespace EyeShot.TempEntities
             // 리스트 뷰에 블록 리스트 항목 채우기
             FillListView();
 
+            // 디자인 효과 및 배경색을 원래대로 돌리기
+            design1.Backface.ColorMethod = devDept.Graphics.backfaceColorMethodType.EntityColor;
+            design1.ActiveViewport.Background.TopColor = oldColor;
+            design1.Flat.EdgeThickness = 1;
+            design1.Flat.SilhouetteThickness = 2;
+            design1.ActiveViewport.DisplayMode = displayType.Rendered;
         }
 
         private void FillListView()
