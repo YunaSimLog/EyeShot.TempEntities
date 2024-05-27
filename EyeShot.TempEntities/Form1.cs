@@ -236,5 +236,30 @@ namespace EyeShot.TempEntities
                 listView1.Items.Add(imageList1.Images.Keys[i], "", i);
             }
         }
+
+        private Mesh GetUniqueEntity(Entity ent)
+        {
+            Mesh uniqueEntity = null;
+
+            // 만약 엔티티가 블럭일 경우, 블럭에 있는 모든 요소를 합친다
+            if (ent is BlockReference)
+            {
+                Entity[] ents = ((BlockReference)ent).Explode(design1.Blocks, keepTessellation: true);
+                uniqueEntity = ((Brep)ents[0]).ConvertToMesh(weld: false);
+                for (int i = 1; i < ents.Length; i++)
+                    uniqueEntity.MergeWith(((Brep)ents[i]).ConvertToMesh(weld: false), false);
+            }
+            else
+            {
+                uniqueEntity = (Mesh)((Brep)ent).ConvertToMesh().Clone();
+            }
+
+            // 임시 요소 리스트 추가 전에 데이터를 재생성한다.
+            if (uniqueEntity.RegenMode == regenType.RegenAndCompile)
+                uniqueEntity.Regen(0.01);
+
+            return uniqueEntity;
+        }
+
     }
 }

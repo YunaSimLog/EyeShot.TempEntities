@@ -32,6 +32,7 @@ namespace EyeShot.TempEntities
             this.components = new System.ComponentModel.Container();
             devDept.Eyeshot.Control.CancelToolBarButton cancelToolBarButton1 = new devDept.Eyeshot.Control.CancelToolBarButton("Cancel", devDept.Eyeshot.Control.ToolBarButton.styleType.ToggleButton, true, true);
             devDept.Eyeshot.Control.ProgressBar progressBar1 = new devDept.Eyeshot.Control.ProgressBar(devDept.Eyeshot.Control.ProgressBar.styleType.Speedometer, 0, "Idle", System.Drawing.Color.Black, System.Drawing.Color.Transparent, System.Drawing.Color.Green, 1D, true, cancelToolBarButton1, false, 0.1D, 0.333D, true);
+            devDept.Eyeshot.Control.DisplayModeSettingsRendered displayModeSettingsRendered1 = new devDept.Eyeshot.Control.DisplayModeSettingsRendered(true, devDept.Eyeshot.edgeColorMethodType.SingleColor, System.Drawing.Color.Black, 1F, 2F, devDept.Eyeshot.silhouettesDrawingType.ImageBased, false, devDept.Graphics.shadowType.Planar, null, false, false, 0.3F, devDept.Graphics.realisticShadowQualityType.High);
             devDept.Eyeshot.Control.BackgroundSettings backgroundSettings1 = new devDept.Eyeshot.Control.BackgroundSettings(devDept.Graphics.backgroundStyleType.LinearGradient, System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255))))), System.Drawing.Color.DodgerBlue, System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255))))), 0.75D, null, devDept.Eyeshot.colorThemeType.Auto, 0.33D);
             devDept.Eyeshot.Camera camera1 = new devDept.Eyeshot.Camera(new devDept.Geometry.Point3D(0D, 0D, 45D), 380D, new devDept.Geometry.Quaternion(0.018434349666532526D, 0.039532590434972079D, 0.42221602280006187D, 0.90544518284475428D), devDept.Eyeshot.projectionType.Perspective, 40D, 4.2600008825350653D, false, 0.001D);
             devDept.Eyeshot.Control.HomeToolBarButton homeToolBarButton1 = new devDept.Eyeshot.Control.HomeToolBarButton("Home", devDept.Eyeshot.Control.ToolBarButton.styleType.PushButton, true, true);
@@ -96,6 +97,7 @@ namespace EyeShot.TempEntities
             // 
             // design1
             // 
+            this.design1.AllowDrop = true;
             this.design1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -103,10 +105,16 @@ namespace EyeShot.TempEntities
             this.design1.Location = new System.Drawing.Point(12, 12);
             this.design1.Name = "design1";
             this.design1.ProgressBar = progressBar1;
+            this.design1.Rendered = displayModeSettingsRendered1;
             this.design1.Size = new System.Drawing.Size(505, 426);
             this.design1.TabIndex = 0;
             this.design1.Text = "design1";
             this.design1.Viewports.Add(viewport1);
+            this.design1.WaitCursorMode = devDept.Eyeshot.Control.waitCursorType.Never;
+            this.design1.DragDrop += new System.Windows.Forms.DragEventHandler(this.design1_DragDrop);
+            this.design1.DragEnter += new System.Windows.Forms.DragEventHandler(this.design1_DragEnter);
+            this.design1.DragOver += new System.Windows.Forms.DragEventHandler(this.design1_DragOver);
+            this.design1.DragLeave += new System.EventHandler(this.design1_DragLeave);
             this.design1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.design1_MouseUp);
             // 
             // groupBox4
@@ -135,6 +143,9 @@ namespace EyeShot.TempEntities
             this.listView1.Size = new System.Drawing.Size(227, 164);
             this.listView1.TabIndex = 5;
             this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.SelectedIndexChanged += new System.EventHandler(this.listView1_SelectedIndexChanged);
+            this.listView1.DragEnter += new System.Windows.Forms.DragEventHandler(this.listView1_DragEnter);
+            this.listView1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseUp);
             // 
             // bboxCheckBox
             // 
