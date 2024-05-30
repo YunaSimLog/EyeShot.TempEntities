@@ -219,6 +219,7 @@ namespace EyeShot.TempEntities
             this.planeCombo.Name = "planeCombo";
             this.planeCombo.Size = new System.Drawing.Size(156, 20);
             this.planeCombo.TabIndex = 7;
+            this.planeCombo.Text = "Plane XY";
             // 
             // moveCheckBox
             // 
@@ -257,6 +258,7 @@ namespace EyeShot.TempEntities
             this.addItemCombo.Name = "addItemCombo";
             this.addItemCombo.Size = new System.Drawing.Size(156, 20);
             this.addItemCombo.TabIndex = 2;
+            this.addItemCombo.Text = "None";
             this.addItemCombo.SelectedIndexChanged += new System.EventHandler(this.addItemCombo_SelectedIndexChanged);
             // 
             // addItemCheckBox

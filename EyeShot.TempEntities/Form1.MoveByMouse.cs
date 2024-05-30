@@ -8,6 +8,7 @@ namespace EyeShot.TempEntities
 {
 	public partial class Form1 : Form
 	{
+		bool _move = false;
 		Plane _plane;
 		Point3D _centerOfArrows;
 		Mesh[] _tempArrows;
