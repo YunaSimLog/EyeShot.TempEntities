@@ -179,6 +179,7 @@ namespace EyeShot.TempEntities
             this.treeView1.Name = "treeView1";
             this.treeView1.Size = new System.Drawing.Size(169, 95);
             this.treeView1.TabIndex = 4;
+            this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
             // 
             // blinkCheckBox
             // 
@@ -191,6 +192,7 @@ namespace EyeShot.TempEntities
             this.blinkCheckBox.TabIndex = 1;
             this.blinkCheckBox.Text = "Enable";
             this.blinkCheckBox.UseVisualStyleBackColor = true;
+            this.blinkCheckBox.CheckedChanged += new System.EventHandler(this.blinkCheckBox_CheckedChanged);
             // 
             // groupBox2
             // 

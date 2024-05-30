@@ -25,6 +25,9 @@ namespace EyeShot.TempEntities
         {
             InitializeComponent();
 
+            _blinkTimer = new Timer();
+            _blinkTimer.Interval = 500;
+            _blinkTimer.Tick += Blink;
         }
 
         protected override void OnLoad(EventArgs e)
