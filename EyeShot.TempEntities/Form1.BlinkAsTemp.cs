@@ -199,10 +199,5 @@ namespace EyeShot.TempEntities
         {
             return $"{name} {index}";
         }
-
-
-
-
-
     }
 }
