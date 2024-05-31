@@ -115,6 +115,8 @@ namespace EyeShot.TempEntities
             this.design1.DragEnter += new System.Windows.Forms.DragEventHandler(this.design1_DragEnter);
             this.design1.DragOver += new System.Windows.Forms.DragEventHandler(this.design1_DragOver);
             this.design1.DragLeave += new System.EventHandler(this.design1_DragLeave);
+            this.design1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.design1_MouseDown);
+            this.design1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.design1_MouseMove);
             this.design1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.design1_MouseUp);
             // 
             // groupBox4
@@ -220,6 +222,7 @@ namespace EyeShot.TempEntities
             this.planeCombo.Size = new System.Drawing.Size(156, 20);
             this.planeCombo.TabIndex = 7;
             this.planeCombo.Text = "Plane XY";
+            this.planeCombo.SelectedIndexChanged += new System.EventHandler(this.planeCombo_SelectedIndexChanged);
             // 
             // moveCheckBox
             // 
@@ -232,6 +235,7 @@ namespace EyeShot.TempEntities
             this.moveCheckBox.TabIndex = 8;
             this.moveCheckBox.Text = "Enable";
             this.moveCheckBox.UseVisualStyleBackColor = true;
+            this.moveCheckBox.CheckedChanged += new System.EventHandler(this.moveCheckBox_CheckedChanged);
             // 
             // groupBox1
             // 

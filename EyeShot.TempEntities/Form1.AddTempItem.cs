@@ -67,6 +67,8 @@ namespace EyeShot.TempEntities
             // 화면의 임시 요소로 마우스 커서 아래에 항목을 추가합니다.
             if (e.Button == MouseButtons.Left && design1.ActionMode == devDept.Eyeshot.actionType.None && !design1.ActiveViewport.ToolBar.Contains(e.Location))
                 AddEntityItem(e.Location);
+
+            _entitiyIndex = -1;
         }
 
         private void AddEntityItem(System.Drawing.Point mousePosition)
